@@ -19,7 +19,7 @@
             android:hint="Your Email.."/>
 
         <EditText
-            android:id="@+id/userPassword"
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Your Password.."/>
