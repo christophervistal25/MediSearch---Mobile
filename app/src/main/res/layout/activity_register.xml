@@ -14,29 +14,44 @@
         <EditText
             android:id="@+id/txtFullname"
             android:hint="Your fullname..."
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/txtEmail"
+            android:inputType="textEmailAddress"
             android:hint="Your Email"
+            android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:hint="Your Password..."
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/txtConfirmPassword"
+            android:hint="Re-type your password"
+            android:singleLine="true"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/txtContact"
+            android:inputType="phone"
+            android:singleLine="true"
             android:hint="Your Contact No."
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/txtAddress"
+            android:singleLine="true"
             android:hint="Your Address..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

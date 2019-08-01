@@ -16,12 +16,16 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
             android:hint="Your Email.."/>
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:singleLine="true"
             android:hint="Your Password.."/>
 
 

@@ -5,29 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.medisearch.APIsInterface.UserLogin;
-import com.example.medisearch.APIsInterface.UserRegister;
 import com.example.medisearch.WebService.Service;
 import com.example.medisearch.WebService.User.UserLoginRequest;
 import com.example.medisearch.WebService.User.UserLoginResponse;
-import com.example.medisearch.WebService.User.UserRegisterRequest;
-import com.example.medisearch.WebService.User.UserRegisterResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Iterator;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
 
-        findViewById(R.id.btnSignIn).setOnClickListener(view -> {
-            signIn();
-        });
+        findViewById(R.id.btnSignIn).setOnClickListener(view -> signIn());
 
         findViewById(R.id.btnSignUp).setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, RegisterActivity.class);
@@ -55,11 +42,38 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // TODO refactor this.
+    private boolean validate()
+    {
+        String emailPattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+
+        if  ( txtEmail.getText().toString().isEmpty() || txtPassword.getText().toString().isEmpty() ) {
+            return false;
+        }
+
+        if ( !txtEmail.getText().toString().matches(emailPattern) ) {
+            return false;
+        }
+
+        return true;
+    }
+
     private void signIn()
+    {
+        if ( this.validate() ) {
+            this.requestSignIn();
+        } else {
+            Toast.makeText(this, "Please check your username or password", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void requestSignIn()
     {
         //Declare progressDialog before so we can use .hide() later!
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("LOADING . . .");
+        progressDialog.setMessage("Signing in...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
@@ -85,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, errorResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
                 progressDialog.dismiss();
 
             }
@@ -96,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
-
     }
 
 
