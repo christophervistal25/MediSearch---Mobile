@@ -1,33 +1,25 @@
 package com.example.medisearch;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.medisearch.APIsInterface.UserRegister;
-import com.example.medisearch.WebService.Service;
-import com.example.medisearch.WebService.User.UserLoginResponse;
-import com.example.medisearch.WebService.User.UserRegisterErrorResponse;
-import com.example.medisearch.WebService.User.UserRegisterRequest;
-import com.example.medisearch.WebService.User.UserRegisterResponse;
+import com.example.medisearch.Models.Service;
+import com.example.medisearch.Models.User.UserRegisterErrorResponse;
+import com.example.medisearch.Models.User.UserRegisterRequest;
+import com.example.medisearch.Models.User.UserRegisterResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.HashMap;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -139,7 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserRegisterResponse> call, retrofit2.Response<UserRegisterResponse> response) {
                     if ( response.code() == 201 && response.isSuccessful() ) {
-                        Toast.makeText(RegisterActivity.this, "Successfully Registered..", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(RegisterActivity.this, DashboardActivity.class);
+                        startActivity(i);
                     } else {
                         APIValidationResponder(response);
                     }

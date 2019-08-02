@@ -1,4 +1,4 @@
-package com.example.medisearch.WebService;
+package com.example.medisearch.Models;
 
 import android.content.Context;
 

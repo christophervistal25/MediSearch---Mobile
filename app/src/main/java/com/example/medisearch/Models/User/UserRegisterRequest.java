@@ -1,4 +1,4 @@
-package com.example.medisearch.WebService.User;
+package com.example.medisearch.Models.User;
 
 import com.google.gson.annotations.SerializedName;
 

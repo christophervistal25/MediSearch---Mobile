@@ -1,17 +1,17 @@
 package com.example.medisearch;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.medisearch.APIsInterface.UserLogin;
-import com.example.medisearch.WebService.Service;
-import com.example.medisearch.WebService.User.UserLoginRequest;
-import com.example.medisearch.WebService.User.UserLoginResponse;
+import com.example.medisearch.Models.Service;
+import com.example.medisearch.Models.User.UserLoginRequest;
+import com.example.medisearch.Models.User.UserLoginResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,12 +34,19 @@ public class MainActivity extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
 
+        this.forDevelopmentPurpose();
+
         findViewById(R.id.btnSignIn).setOnClickListener(view -> signIn());
 
         findViewById(R.id.btnSignUp).setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(i);
         });
+    }
+
+    private void forDevelopmentPurpose() {
+        txtEmail.setText("christopher51@example.com");
+        txtPassword.setText("123456");
     }
 
 
@@ -91,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
                 // Successfully login and redirect to dashboard page
                 if  (response.code() == 200 && response.isSuccessful() ) {
-                    Toast.makeText(MainActivity.this, "Successfully login, Redirecting...", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this, DashboardActivity.class);
+                    startActivity(i);
                 } else {
                     Gson gson = new Gson();
                     Type type = new TypeToken<UserLoginResponse>() {}.getType();

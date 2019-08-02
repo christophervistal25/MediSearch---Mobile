@@ -1,9 +1,8 @@
 package com.example.medisearch.APIsInterface;
 
-import com.example.medisearch.WebService.User.UserLoginRequest;
-import com.example.medisearch.WebService.User.UserLoginResponse;
-import com.example.medisearch.WebService.User.UserRegisterRequest;
-import com.example.medisearch.WebService.User.UserRegisterResponse;
+
+import com.example.medisearch.Models.User.UserLoginRequest;
+import com.example.medisearch.Models.User.UserLoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

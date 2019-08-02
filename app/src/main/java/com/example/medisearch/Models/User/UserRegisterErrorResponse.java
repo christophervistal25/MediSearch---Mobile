@@ -1,7 +1,8 @@
-package com.example.medisearch.WebService.User;
-import java.util.List;
+package com.example.medisearch.Models.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 public class UserRegisterErrorResponse {
 
     @SerializedName("email")
