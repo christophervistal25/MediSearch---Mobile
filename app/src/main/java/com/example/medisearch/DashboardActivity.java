@@ -14,6 +14,8 @@ public class DashboardActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +23,16 @@ public class DashboardActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
+
         adapter = new Tab(getSupportFragmentManager());
         adapter.addFragment(new StoreFragment(), "Stores");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
+
 
 
 }
