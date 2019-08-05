@@ -1,4 +1,4 @@
-package com.example.medisearch.APIsInterface;
+package com.example.medisearch.APIsInterface.Store;
 
 import com.example.medisearch.Models.Stores.Store;
 

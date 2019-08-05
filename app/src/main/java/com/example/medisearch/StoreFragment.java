@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.medisearch.APIsInterface.Stores;
+import com.example.medisearch.APIsInterface.Store.Stores;
 import com.example.medisearch.Adapters.StoresAdapter;
 import com.example.medisearch.Models.Service;
 import com.example.medisearch.Models.Stores.Store;
@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class StoreFragment extends Fragment {
+public class StoreFragment extends Fragment implements StoresAdapter.OnClickResponse {
 
 
     RecyclerView recyclerView;
@@ -70,9 +70,7 @@ public class StoreFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         EditText searchStoreField = view.findViewById(R.id.searchStore);
-
         searchStoreField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,13 +88,18 @@ public class StoreFragment extends Fragment {
             }
         });
 
-        // Display all available stores in recyclerview.
+        // Display all available stores in Recyclerview.
         this.getStores(view);
+
+        super.onViewCreated(view, savedInstanceState);
 
     }
 
     private void buildRecyclerView(View view, List<Store> storeList) {
         storeAdapter = new StoresAdapter(storeList);
+
+        // Attaching the listener on this fragment.
+        storeAdapter.OnClickResponse = this;
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
@@ -126,4 +129,20 @@ public class StoreFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_store, container, false);
     }
 
+    @Override
+    public void onSuccess(long id, String storeName, String storeAddress) {
+
+        // Display StoreInformation
+        StoreInformationFragment StoreInfoFragment = new StoreInformationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong("store_id", id);
+        bundle.putString("store_name", storeName);
+        bundle.putString("store_address", storeAddress);
+
+        StoreInfoFragment.setArguments(bundle);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.store_information, StoreInfoFragment, "STORE_INFORMATION")
+                .addToBackStack(null)
+                .commit();
+    }
 }
